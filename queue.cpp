@@ -25,23 +25,23 @@ public:
 	queueType(const queueType<Type>& otherQueue);
 	~queueType();
 private:
-	int maxQueueSize; //variable to store the maximum queue size
-	int count; //variable to store the number of
-	int queueFront; //variable to point to the first
-	int queueRear; //variable to point to the last
-	Type *list; //pointer to the array that holds
+	int maxQueueSize; 
+	int count;
+	int queueFront; 
+	int queueRear; 
+	Type *list; 
 };
 template <class Type>
 bool queueType<Type>::isEmptyQueue() const
 {
 	return (count == 0);
-} //end isEmptyQueue
+}
 
 template <class Type>
 bool queueType<Type>::isFullQueue() const
 {
 	return (count == maxQueueSize);
-} //end isFullQueue
+}
 
 template <class Type>
 void queueType<Type>::initializeQueue()
@@ -49,51 +49,47 @@ void queueType<Type>::initializeQueue()
 	queueFront = 0;
 	queueRear = maxQueueSize - 1;
 	count = 0;
-} //end initializeQueue
+}
 
 template <class Type>
 Type queueType<Type>::front() const
 {
 	assert(!isEmptyQueue());
 	return list[queueFront];
-} //end front
+}
 
 template <class Type>
 Type queueType<Type>::back() const
 {
 	assert(!isEmptyQueue());
 	return list[queueRear];
-} //end back
+}
 
 template <class Type>
 void queueType<Type>::addQueue(const Type& newElement)
 {
 	if (!isFullQueue())
 	{
-		queueRear = (queueRear + 1) % maxQueueSize; //use the
-		//mod operator to advance queueRear
-		//because the array is circular
+		queueRear = (queueRear + 1) % maxQueueSize;
 		count++;
 		list[queueRear] = newElement;
 	}
 	else
 		cout << "Cannot add to a full queue." << endl;
-} //end addQueue
+} 
 
 template <class Type>
 void queueType<Type>::addQueue(const Type& newElement)
 {
 	if (!isFullQueue())
 	{
-		queueRear = (queueRear + 1) % maxQueueSize; //use the
-		//mod operator to advance queueRear
-		//because the array is circular
+		queueRear = (queueRear + 1) % maxQueueSize; 
 		count++;
 		list[queueRear] = newElement;
 	}
 	else
 		cout << "Cannot add to a full queue." << endl;
-} //end addQueue
+}
 
 template <class Type>
 queueType<Type>::queueType(int queueSize)
@@ -106,14 +102,12 @@ queueType<Type>::queueType(int queueSize)
 		maxQueueSize = 100;
 	}
 	else
-		maxQueueSize = queueSize; //set maxQueueSize to
-	//queueSize
-	queueFront = 0; //initialize queueFront
-	queueRear = maxQueueSize - 1; //initialize queueRear
+		maxQueueSize = queueSize; 
+	queueFront = 0; 
+	queueRear = maxQueueSize - 1; 
 	count = 0;
-	list = new Type[maxQueueSize]; //create the array to
-	//hold the queue elements
-} //end constructor
+	list = new Type[maxQueueSize]; 
+} 
 
 template <class Type>
 queueType<Type>::~queueType()
