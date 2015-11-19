@@ -1,88 +1,57 @@
+#include <iostream>
+#include <assert.h>
+using namespace std;
+
 template <class Type>
-class queueADT{
+class queueType{
+private:
+	int maxQueueSize;
+	int count;
+	int queueFront;
+	int queueRear;
 public:
-	virtual bool isEmptyQueue() const = 0;
-	virtual bool isFullQueue() const = 0;
-	virtual void initializeQueue() = 0;
-	virtual Type front() const = 0;
-	virtual Type back() const = 0;
-	virtual void addQueue(const Type& queueElement) = 0;
-	virtual void deleteQueue() = 0;
-};
-template <class Type>
-class queueType: public queueADT<Type>
-{
-public:
-	const queueType<Type>& operator=(const queueType<Type>&);
+	Type *list;
 	bool isEmptyQueue() const;
 	bool isFullQueue() const;
 	void initializeQueue();
 	Type front() const;
 	Type back() const;
 	void addQueue(const Type& queueElement);
-	void deleteQueue();
 	queueType(int queueSize = 100);
-	queueType(const queueType<Type>& otherQueue);
 	~queueType();
-private:
-	int maxQueueSize; 
-	int count;
-	int queueFront; 
-	int queueRear; 
-	Type *list; 
 };
 template <class Type>
-bool queueType<Type>::isEmptyQueue() const
-{
+bool queueType<Type>::isEmptyQueue() const{
 	return (count == 0);
 }
 
 template <class Type>
-bool queueType<Type>::isFullQueue() const
-{
+bool queueType<Type>::isFullQueue() const{
 	return (count == maxQueueSize);
 }
 
 template <class Type>
-void queueType<Type>::initializeQueue()
-{
+void queueType<Type>::initializeQueue(){
 	queueFront = 0;
 	queueRear = maxQueueSize - 1;
 	count = 0;
 }
 
 template <class Type>
-Type queueType<Type>::front() const
-{
+Type queueType<Type>::front() const{
 	assert(!isEmptyQueue());
 	return list[queueFront];
 }
 
 template <class Type>
-Type queueType<Type>::back() const
-{
+Type queueType<Type>::back() const{
 	assert(!isEmptyQueue());
 	return list[queueRear];
 }
 
 template <class Type>
-void queueType<Type>::addQueue(const Type& newElement)
-{
-	if (!isFullQueue())
-	{
-		queueRear = (queueRear + 1) % maxQueueSize;
-		count++;
-		list[queueRear] = newElement;
-	}
-	else
-		cout << "Cannot add to a full queue." << endl;
-} 
-
-template <class Type>
-void queueType<Type>::addQueue(const Type& newElement)
-{
-	if (!isFullQueue())
-	{
+void queueType<Type>::addQueue(const Type& newElement){
+	if (!isFullQueue()){
 		queueRear = (queueRear + 1) % maxQueueSize; 
 		count++;
 		list[queueRear] = newElement;
@@ -92,25 +61,43 @@ void queueType<Type>::addQueue(const Type& newElement)
 }
 
 template <class Type>
-queueType<Type>::queueType(int queueSize)
-{
-	if (queueSize <= 0)
-	{
-		cout << "Size of the array to hold the queue must "
-			<< "be positive." << endl;
-		cout << "Creating an array of size 100." << endl;
+queueType<Type>::queueType(int queueSize){
+	if (queueSize <= 0){
 		maxQueueSize = 100;
 	}
 	else
 		maxQueueSize = queueSize; 
-	queueFront = 0; 
+	queueFront = 0;
 	queueRear = maxQueueSize - 1; 
 	count = 0;
 	list = new Type[maxQueueSize]; 
 } 
 
 template <class Type>
-queueType<Type>::~queueType()
-{
+queueType<Type>::~queueType(){
 	delete [] list;
+}
+
+template<class Type>
+queueType<Type>& operator+(const queueType<Type>A , const queueType<Type>B){
+	queueType<Type>Temp(100);
+	for(int i=0;i<50;i++){
+		Temp.addQueue(A.list[i]);
+	}
+	for(int j=0;j<50;j++){
+		Temp.addQueue(B.list[j]);
+	}
+	return Temp;
+}
+
+int main(){
+	queueType<int>cola(100);
+	cola.initializeQueue();
+	cola.addQueue(12);
+	queueType<int>cola2(100);
+	cola2.initializeQueue();
+	cola2.addQueue(13);
+	queueType<int>cola3(100);
+	cola3 = cola+cola2;
+	return 0;
 }
