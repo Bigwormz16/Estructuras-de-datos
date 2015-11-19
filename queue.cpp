@@ -89,6 +89,18 @@ queueType<Type>& operator+(const queueType<Type>A , const queueType<Type>B){
 	}
 	return Temp;
 }
+template<class Type>
+queueType<Type>& operator-(const queueType<Type>A , const queueType<Type>B){
+	queueType<Type>Temp(100);
+	for(int i=0;i<50;i++){
+		int j=0;
+		if(A.list[i]!=B.list[j]){
+		Temp.addQueue(A.list[i]);
+		}
+		j++;
+	}
+	return Temp;
+}
 
 int main(){
 	queueType<int>cola(100);
@@ -99,5 +111,14 @@ int main(){
 	cola2.addQueue(13);
 	queueType<int>cola3(100);
 	cola3 = cola+cola2;
+	
+	queueType<int> cola4(50);
+	cola4.initializeQueue();
+	cola4.addQueue(665);
+	queueType<int> cola5(50);
+	cola5.initializeQueue();
+	cola5.addQueue(2131);
+	queueType<int> cola6(100);
+	cola4=cola5-cola6;
 	return 0;
 }
