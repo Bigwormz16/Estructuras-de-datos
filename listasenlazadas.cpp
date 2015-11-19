@@ -231,7 +231,7 @@ linkedListType<Type> operator-(const linkedListType <Type>A , const linkedListTy
 		if( A.front() != B.front() ){
 			Temp.insertFirst(A.front());
 		    A.deleteNode(A.front());
-			B.deleteNode(B.front());
+		    B.deleteNode(B.front());
 		}
 	}
 	return Temp;
