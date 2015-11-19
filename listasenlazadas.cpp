@@ -138,7 +138,7 @@ bool linkedListType<Type>::search(const Type& searchItem) const{
 			found = true;
 		else
 			current = current->link;
-		return found;
+	return found;
 }
 template <class Type>
 void linkedListType<Type>::insertFirst(const Type& newItem){
@@ -223,6 +223,19 @@ linkedListType<Type> operator+(const linkedListType <Type>A , const linkedListTy
 	}
 	return Temp;
 }
+template <class Type>
+linkedListType<Type> operator-(const linkedListType <Type>A , const linkedListType <Type>B){
+	linkedListType<Type>Temp;
+	Temp.initializeList();
+	for(int i=0;i<A.length();i++){
+		if( A.front() != B.front() ){
+			Temp.insertFirst(A.front());
+		    A.deleteNode(A.front());
+			B.deleteNode(B.front());
+		}
+	}
+	return Temp;
+}
 int main(){
 	linkedListType<int> lista;
 	lista.initializeList();
@@ -243,5 +256,22 @@ int main(){
 	linkedListType<int> lista3;
 	lista3.initializeList();
 	lista3=lista+lista2;
+	
+	linkedListType<int> lista4;
+	lista4.initializeList();
+	lista4.insertFirst(1021);
+	lista4.insertFirst(12213);
+	lista4.insertFirst(31313);
+	
+	linkedListType<int> lista5;
+	lista5.initializeList();
+	lista5.insertFirst(1021);
+	lista5.insertFirst(534543);
+	lista5.insertFirst(634564);
+	
+	linkedListType<int> lista6;
+	lista6.initializeList();
+	lista6=lista4-lista5;
+	
 	return 0;
 }
