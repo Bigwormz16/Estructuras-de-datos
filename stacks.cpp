@@ -1,5 +1,4 @@
 #include<iostream>
-#include <assert.h>
 using namespace std;
 template <class Type>
 class stackType{
@@ -39,7 +38,6 @@ void stackType<Type>::push(const Type& newItem){
 }
 template <class Type>
 Type stackType<Type>::top() const{
-	assert(stackTop != 0);
 	return list[stackTop - 1];
 }
 template <class Type>
@@ -51,7 +49,7 @@ void stackType<Type>::pop(){
 template <class Type>
 stackType<Type>::stackType(int stackSize){
 	if (stackSize <= 0){
-		cout<<"En ves de 0 que le parece 100 y lo haremos asi"<<endl;
+		cout<<"En ves de 0 que le parece 100 ,y lo haremos asi"<<endl;
 		maxStackSize = 100;
 	}
 	else
@@ -74,6 +72,18 @@ stackType<Type> operator+(const stackType<Type>A , const stackType<Type>B){
 	}
 	return Temp;
 }
+template<class Type>
+stackType<Type> operator-(const stackType<Type>A , const stackType<Type>B){
+	stackType<Type>Temp(101);
+	for (int i=0;i<50;i++){
+		int j=0;
+		if(A.list[i]!=B.list[j]){
+			Temp.push(A.list[i]);
+		}
+		j++;
+	}
+	return Temp;
+}
 int main(){
 	stackType<int> pila(50);
 	pila.initializeStack();
@@ -86,6 +96,16 @@ int main(){
 	pila2.initializeStack();
 	pila2.push(10);
 	stackType<int> pila3(100);
+	
+	stackType<int> pila4(50);
+	pila4.initializeStack();
+	pila4.push(665);
+	stackType<int> pila5(50);
+	pila5.initializeStack();
+	pila5.push(2131);
+	stackType<int> pila6(100);
+	
 	pila3=pila+pila2;
+	pila4=pila5-pila6;
 	return 0;
 }
